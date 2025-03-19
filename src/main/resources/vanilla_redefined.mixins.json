@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.doublepi.vanilla_redefined.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "FireworkItemMixin",
+    "LeavesBlockMixin"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
