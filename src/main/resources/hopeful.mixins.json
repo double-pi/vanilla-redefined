@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.doublepi.hopeful.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "FireworkItemMixin",
+    "LeavesBlockMixin",
+    "PlayerMixin",
+    "ServerPlayerMixin",
+    "AnvilMenuMixin"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
