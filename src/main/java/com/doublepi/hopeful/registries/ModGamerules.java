@@ -27,11 +27,4 @@ public class ModGamerules {
     public static final GameRules.Key<GameRules.BooleanValue> KEEP_EXP =
     createBoolean("keepExperience", GameRules.Category.PLAYER, true);
 
-//    public static final GameRules.Key<GameRules.IntegerValue> DAYS_TILL_INSOMNIA
-//            = GameRules.register("daysTillInsomnia",
-//            GameRules.Category.MOBS,
-//            GameRules.IntegerValue.create(10,
-//                    (minecraftServer, integerValue)
-//                            -> LOGGER.info("set value to {}", integerValue.get())));
-
 }

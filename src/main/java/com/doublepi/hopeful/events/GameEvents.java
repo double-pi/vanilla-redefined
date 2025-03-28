@@ -52,14 +52,14 @@ public class GameEvents {
             Player player = event.getPlayer();
             BlockState state = level.getBlockState(pos);
             boolean flag = false;
-            if (!level.isClientSide() && state.is(Blocks.DAMAGED_ANVIL)){
-                level.destroyBlock(pos,false);
-                level.setBlockAndUpdate(pos,Blocks.CHIPPED_ANVIL.withPropertiesOf(state));
-                flag = true;
-            }
             if (!level.isClientSide() && state.is(Blocks.CHIPPED_ANVIL)){
                 level.destroyBlock(pos,false);
                 level.setBlockAndUpdate(pos,Blocks.ANVIL.withPropertiesOf(state));
+                flag = true;
+            }
+            if (!level.isClientSide() && state.is(Blocks.DAMAGED_ANVIL)){
+                level.destroyBlock(pos,false);
+                level.setBlockAndUpdate(pos,Blocks.CHIPPED_ANVIL.withPropertiesOf(state));
                 flag = true;
             }
             if(flag){

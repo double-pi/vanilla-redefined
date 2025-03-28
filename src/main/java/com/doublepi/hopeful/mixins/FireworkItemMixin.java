@@ -15,11 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FireworkRocketItem.class)
 public class FireworkItemMixin {
-//    @Inject(method = "useOn", at = @At("HEAD"))
-//    public void useOnTest(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir){
-//        VanillaRedefinedMod.LOGGER.error("help");
-//        context.getPlayer().sendSystemMessage(Component.literal("help"));
-//    }
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void useModified(Level level, Player player,
                             InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir){

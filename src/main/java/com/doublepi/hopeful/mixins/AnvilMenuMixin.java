@@ -8,5 +8,4 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(AnvilMenu.class)
 public class AnvilMenuMixin {
 
-    @Shadow @Final private static int COST_RENAME = 0;
 }
