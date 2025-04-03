@@ -28,12 +28,13 @@ public class HopefulMod {
 
         NeoForge.EVENT_BUS.register(this);
 
+        modEventBus.register(ModTomes.class);
+
         ModItems.register(modEventBus);
+        ModDataComponentTypes.register(modEventBus);
         ModBlocks.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModGamerules.register();
-        ModMenuTypes.register(modEventBus);
 
     }
 
@@ -61,8 +62,6 @@ public class HopefulMod {
 
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
-            ModMenuTypes.registerScreens(event);
-
         }
     }
 }

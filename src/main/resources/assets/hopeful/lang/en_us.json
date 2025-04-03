@@ -1,9 +1,10 @@
 {
-  "item.hopeful.blaze_rune": "Blazeforged Rune",
-  "item.hopeful.aquatic_rune": "Seaswept Rune",
-  "item.hopeful.breeze_rune": "Windy Rune",
-  "item.hopeful.rooted_rune": "Rooted Rune",
-
+  "tome.hopeful.luck": "Luck",
+  "tome.hopeful.unbreaking": "Unbreaking",
+  "item.hopeful.tome": "Enchanted Tome",
+  "tome.hopeful.type.blessing": "Blessing",
+  "tome.hopeful.type.curse": "Curse",
+  "tome.hopeful.type.exchange": "Deal",
 
   "tooltip.hopeful.disabled_elytra_boosting": "Elytra Boosting is disabled."
 }
