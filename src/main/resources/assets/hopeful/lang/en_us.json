@@ -1,10 +1,15 @@
 {
   "tome.hopeful.luck": "Luck",
   "tome.hopeful.unbreaking": "Unbreaking",
+  "tome.hopeful.punch": "Punch",
+
+
   "item.hopeful.tome": "Enchanted Tome",
   "tome.hopeful.type.blessing": "Blessing",
   "tome.hopeful.type.curse": "Curse",
-  "tome.hopeful.type.exchange": "Deal",
+  "tome.hopeful.type.deal": "Deal",
 
-  "tooltip.hopeful.disabled_elytra_boosting": "Elytra Boosting is disabled."
+  "tooltip.hopeful.disabled_elytra_boosting": "Elytra Boosting is disabled.",
+  "tooltip.hopeful.enchant_status": "Enchant Status",
+  "container.hopeful.forge": "Forge"
 }

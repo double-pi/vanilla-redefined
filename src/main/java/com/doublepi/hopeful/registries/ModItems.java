@@ -11,7 +11,7 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(HopefulMod.MODID);
 
     public static final DeferredItem<Item> TOME = ITEMS.register("tome",
-            ()-> new TomeItem(new Item.Properties()));
+            ()-> new TomeItem(new Item.Properties().stacksTo(16)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

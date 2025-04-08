@@ -3,6 +3,7 @@ package com.doublepi.hopeful.tomes;
 import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
 import com.doublepi.hopeful.registries.ModItems;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;

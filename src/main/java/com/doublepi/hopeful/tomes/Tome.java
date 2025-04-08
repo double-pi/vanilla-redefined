@@ -3,7 +3,6 @@ package com.doublepi.hopeful.tomes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.AdvancementType;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
@@ -19,18 +18,10 @@ public record Tome(Component title, TomeType tomeType, int maxLevel, int scorePe
                     ComponentSerialization.CODEC.fieldOf("title").forGetter(Tome::title),
                     TomeType.CODEC.fieldOf("type").forGetter(Tome::tomeType),
                     ExtraCodecs.intRange(0,255).fieldOf("max_level").forGetter(Tome::maxLevel),
-                    ExtraCodecs.intRange(-16,16).fieldOf("score_per_level").forGetter(Tome::maxLevel),
+                    ExtraCodecs.intRange(-16,16).fieldOf("score_per_level").forGetter(Tome::scorePerLevel),
                     RegistryCodecs.homogeneousList(Registries.ENCHANTMENT).fieldOf("enchantments").forGetter(Tome::enchantments))
                     .apply(tomeInstance, Tome::new)
             ));
-
-    public Tome(Component title, TomeType tomeType, int maxLevel, int scorePerLevel, HolderSet<Enchantment> enchantments) {
-        this.title = title;
-        this.tomeType = tomeType;
-        this.maxLevel = maxLevel;
-        this.scorePerLevel = scorePerLevel;
-        this.enchantments = enchantments;
-    }
 
     @Override
     public Component title() {
@@ -61,7 +52,7 @@ public record Tome(Component title, TomeType tomeType, int maxLevel, int scorePe
 enum TomeType implements StringRepresentable{
     BLESSING("blessing", ChatFormatting.GREEN),
     CURSE("curse", ChatFormatting.DARK_RED),
-    EXCHANGE("exchange", ChatFormatting.YELLOW);
+    DEAL("deal", ChatFormatting.YELLOW);
 
     public static final Codec<TomeType> CODEC = StringRepresentable.fromEnum(TomeType::values);
 

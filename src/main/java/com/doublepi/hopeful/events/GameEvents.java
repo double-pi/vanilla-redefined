@@ -4,6 +4,7 @@ import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.registries.ModGamerules;
 import com.doublepi.hopeful.registries.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.item.ItemExpireEvent;
+import net.neoforged.neoforge.event.entity.player.AnvilRepairEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 @EventBusSubscriber(modid = HopefulMod.MODID, bus = EventBusSubscriber.Bus.GAME)
@@ -41,6 +43,11 @@ public class GameEvents {
         if(saplingItem instanceof BlockItem blockItem) {
             level.setBlockAndUpdate(pos.above(), blockItem.getBlock().defaultBlockState());
         }
+    }
+
+    @SubscribeEvent
+    public static void removeRepairCost(AnvilRepairEvent event){
+        event.getOutput().remove(DataComponents.REPAIR_COST);
     }
 
     @SubscribeEvent

@@ -1,11 +1,13 @@
 package com.doublepi.hopeful.registries;
 
 import com.doublepi.hopeful.HopefulMod;
+import com.doublepi.hopeful.forge.ForgeBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -16,6 +18,9 @@ public class ModBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(HopefulMod.MODID);
 
+    public static final DeferredBlock<Block> FORGE = registerBlock("forge",
+            ()-> new ForgeBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)
+                    .sound(SoundType.AMETHYST)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block){
         DeferredBlock<T> toReturn = BLOCKS.register(name,block);

@@ -4,13 +4,12 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FireworkItemMixin",
+    "ItemMixin",
     "LeavesBlockMixin",
     "PlayerMixin",
-    "ServerPlayerMixin",
-    "AnvilMenuMixin"
+    "ServerPlayerMixin"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1

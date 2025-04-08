@@ -23,6 +23,7 @@ public class ModCreativeTabs {
                     .title(Component.translatable("hopeful.tab"))
                     .icon(() -> new ItemStack(ModItems.TOME.get()))
                     .displayItems((pParameters, pOutput) -> {
+                        pOutput.accept(ModBlocks.FORGE);
                         pParameters.holders().lookup(ModTomes.TOME_REGISTRY_KEY).ifPresent(
                                 tomeRegistryLookup -> {
                                     HopefulMod.LOGGER.error("registry lookup "+ tomeRegistryLookup.listElements().count());

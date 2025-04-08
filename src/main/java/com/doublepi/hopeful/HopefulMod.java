@@ -33,6 +33,7 @@ public class HopefulMod {
         ModItems.register(modEventBus);
         ModDataComponentTypes.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModMenus.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModGamerules.register();
 
@@ -62,6 +63,7 @@ public class HopefulMod {
 
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
+            ModScreens.register(event);
         }
     }
 }
