@@ -18,9 +18,9 @@ public class TomeHelper {
                 HopefulMod.LOGGER.error("Item enchanted to lvl "+ newLevel+ " score was changed from "+getScore(item)+
                         " to "+ (getScore(item) + tome.scorePerLevel()));
                 item.enchant(enchantment, newLevel);
-                setScore(item, getScore(item) + tome.scorePerLevel());
             }
         }
+        setScore(item, getScore(item) + tome.scorePerLevel());
     }
 
     public static boolean supportsTome(ItemStack item, Tome tome){
@@ -58,7 +58,7 @@ public class TomeHelper {
         if(!stack.has(ModDataComponentTypes.ENCHANTABILITY_STATUS)){
             stack.set(ModDataComponentTypes.ENCHANTABILITY_STATUS,0);
         }
-        return enchantabilityToScore(stack.get(ModDataComponentTypes.ENCHANTABILITY_STATUS));
+        return stack.get(ModDataComponentTypes.ENCHANTABILITY_STATUS);
     }
 
     public static void setScore(ItemStack stack, int value){

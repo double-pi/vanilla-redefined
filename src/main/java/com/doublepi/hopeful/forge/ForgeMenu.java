@@ -47,7 +47,7 @@ public class ForgeMenu extends ItemCombinerMenu {
 
     protected ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
         return ItemCombinerMenuSlotDefinition.create()
-                .withSlot(INPUT_SLOT, 27, 47, (p_266635_) -> true)
+                .withSlot(INPUT_SLOT, 27, 47, ItemStack::isDamageableItem)
                 .withSlot(TOME_SLOT, 76, 47, (p_266634_) -> p_266634_.is(ModItems.TOME))
                 .withResultSlot(RESULT_SLOT, 134, 47)
                 .build();
@@ -58,11 +58,14 @@ public class ForgeMenu extends ItemCombinerMenu {
         return state.is(ModBlocks.FORGE);
     }
 
-    protected boolean mayPickup(Player player, boolean hasStack) {
-        return player.hasInfiniteMaterials();
+
+    @Override
+    protected boolean mayPickup(Player player, boolean b) {
+        return true;
     }
 
     protected void onTake(Player player, ItemStack stack) {
+        HopefulMod.LOGGER.error("onTake called");
         ItemStack base = this.inputSlots.getItem(INPUT_SLOT);
         base.shrink(1);
         this.inputSlots.setItem(INPUT_SLOT, base);
@@ -77,11 +80,15 @@ public class ForgeMenu extends ItemCombinerMenu {
         ItemStack tomeItem = this.inputSlots.getItem(TOME_SLOT);
         ItemStack result = base.copy();
 
-        if(!tomeItem.has(ModDataComponentTypes.TOME_DATA))
+        if(!tomeItem.has(ModDataComponentTypes.TOME_DATA)) {
+            this.resultSlots.setItem(RESULT_SLOT,ItemStack.EMPTY);
             return;
+        }
         Tome tome = tomeItem.get(ModDataComponentTypes.TOME_DATA);
-        if(base.isEmpty() || !TomeHelper.supportsTome(base,tome))
+        if(base.isEmpty() || !TomeHelper.supportsTome(base,tome)) {
+            this.resultSlots.setItem(RESULT_SLOT,ItemStack.EMPTY);
             return;
+        }
 
         TomeHelper.enchant(result, tome);
         resultSlots.setItem(RESULT_SLOT,result);
