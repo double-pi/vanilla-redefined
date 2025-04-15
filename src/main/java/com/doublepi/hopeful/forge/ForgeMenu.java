@@ -70,7 +70,7 @@ public class ForgeMenu extends ItemCombinerMenu {
             this.resultSlots.setItem(RESULT_SLOT,ItemStack.EMPTY);
             return;
         }
-        Scroll scroll = scrollItem.get(ModDataComponentTypes.SCROLL);
+        Scroll scroll = scrollItem.get(ModDataComponentTypes.SCROLL).value();
         if(base.isEmpty() || !ScrollHelper.supportsScroll(base, scroll)) {
             this.resultSlots.setItem(RESULT_SLOT,ItemStack.EMPTY);
             return;

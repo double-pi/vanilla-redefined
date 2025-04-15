@@ -1,7 +1,9 @@
 {
   "tab.hopeful.scrolls": "Hopeful's Scrolls",
-  "container.hopeful.forge": "Forge",
+  "container.hopeful.forge": "Enchant Using Scrolls",
   "block.hopeful.forge": "Forge",
+
+  "item.hopeful.unknown_scroll": "Unknown Scroll",
 
   "scroll.hopeful.type.blessing": "Blessing",
   "scroll.hopeful.type.curse": "Curse",
@@ -28,4 +30,5 @@
   "tooltip.hopeful.when_used_in_forge": "When Forged:",
 
   "tag.item.hopeful.anvil_mends": "Anvil Mends"
+
 }

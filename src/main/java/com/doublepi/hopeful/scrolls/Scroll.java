@@ -8,12 +8,16 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 public record Scroll(Component title, ScrollType scrollType, int maxLevel, int scorePerLevel, HolderSet<Enchantment> enchantments) {
     public static final Codec<Scroll> CODEC =
@@ -27,7 +31,10 @@ public record Scroll(Component title, ScrollType scrollType, int maxLevel, int s
             ));
 
     public static final Codec<Holder<Scroll>> HOLDER_CODEC =
-            RegistryFixedCodec.create(ModResourceRegistries.SCROLL_REGISTRY_KEY);;
+            RegistryFixedCodec.create(ModResourceRegistries.SCROLL_REGISTRY_KEY);
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<Scroll>> STREAM_CODEC =
+            ByteBufCodecs.holderRegistry(ModResourceRegistries.SCROLL_REGISTRY_KEY);;
 
     @Override
     public Component title() {

@@ -2,10 +2,15 @@ package com.doublepi.hopeful.scrolls;
 
 import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
+import com.doublepi.hopeful.registries.ModResourceRegistries;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+
+import java.util.List;
 
 public class ScrollHelper {
 
@@ -64,5 +69,16 @@ public class ScrollHelper {
 
     public static void setScore(ItemStack stack, int value){
         stack.set(ModDataComponentTypes.ENCHANTABILITY_STATUS,value);
+    }
+
+
+    public static Scroll randomScroll(ServerLevel level){
+        if(!level.registryAccess().lookup(ModResourceRegistries.SCROLL_REGISTRY_KEY).isPresent())
+            HopefulMod.LOGGER.error("No registry??");
+        List<Holder.Reference<Scroll>> list =
+                level.registryAccess().lookup(ModResourceRegistries.SCROLL_REGISTRY_KEY).get().listElements().toList();
+        int len = list.size();
+        int randomIndex = (int)(Math.random() * len);
+        return list.get(randomIndex).value();
     }
 }
