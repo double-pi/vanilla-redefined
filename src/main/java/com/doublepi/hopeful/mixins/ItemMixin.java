@@ -1,12 +1,11 @@
 package com.doublepi.hopeful.mixins;
 
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
-import com.doublepi.hopeful.tomes.TomeHelper;
+import com.doublepi.hopeful.scrolls.ScrollHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.TooltipFlag;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,7 +28,7 @@ public abstract class ItemMixin {
             if(stack.has(ModDataComponentTypes.ENCHANTABILITY_STATUS))
                 text.append(Component.literal(stack.get(ModDataComponentTypes.ENCHANTABILITY_STATUS)+"/"));
 
-            text.append(Component.literal(TomeHelper.enchantabilityToScore(stack.getEnchantmentValue())+")"));
+            text.append(Component.literal(ScrollHelper.enchantabilityToScore(stack.getEnchantmentValue())+")"));
             tooltipComponents.add(text);
         }
     }

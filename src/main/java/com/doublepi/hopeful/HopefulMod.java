@@ -1,11 +1,7 @@
 package com.doublepi.hopeful;
 
 import com.doublepi.hopeful.registries.*;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -15,8 +11,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.slf4j.Logger;
 
 @Mod(HopefulMod.MODID)
 public class HopefulMod {
@@ -28,7 +26,7 @@ public class HopefulMod {
 
         NeoForge.EVENT_BUS.register(this);
 
-        modEventBus.register(ModTomes.class);
+        modEventBus.register(ModResourceRegistries.class);
 
         ModItems.register(modEventBus);
         ModDataComponentTypes.register(modEventBus);
@@ -36,7 +34,6 @@ public class HopefulMod {
         ModMenus.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModGamerules.register();
-
     }
 
     private void commonSetup(final FMLCommonSetupEvent event){

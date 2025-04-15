@@ -1,43 +1,44 @@
-package com.doublepi.hopeful.tomes;
+package com.doublepi.hopeful.scrolls;
 
 import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-public class TomeHelper {
+public class ScrollHelper {
 
-    public static void enchant(ItemStack item, Tome tome){
-        for(Holder<Enchantment> enchantment : tome.enchantments()){
+    public static void enchant(ItemStack item, Scroll scroll){
+        for(Holder<Enchantment> enchantment : scroll.enchantments()){
             boolean itemSupportsEnchantment = item.supportsEnchantment(enchantment);
-            boolean isNotMaxLevel = item.getEnchantmentLevel(enchantment)< tome.maxLevel();
+            boolean isNotMaxLevel = item.getEnchantmentLevel(enchantment)< scroll.maxLevel();
             if(itemSupportsEnchantment && isNotMaxLevel && getScore(item) < enchantabilityToScore(item.getEnchantmentValue())){
                 int newLevel = item.getEnchantmentLevel(enchantment) + 1;
                 HopefulMod.LOGGER.error("Item enchanted to lvl "+ newLevel+ " score was changed from "+getScore(item)+
-                        " to "+ (getScore(item) + tome.scorePerLevel()));
+                        " to "+ (getScore(item) + scroll.scorePerLevel()));
                 item.enchant(enchantment, newLevel);
             }
         }
-        setScore(item, getScore(item) + tome.scorePerLevel());
+        setScore(item, getScore(item) + scroll.scorePerLevel());
     }
 
-    public static boolean supportsTome(ItemStack item, Tome tome){
+
+    public static boolean supportsScroll(ItemStack item, Scroll scroll){
         int maxScore = getMaxScore(item);
         int currentScore = getScore(item);
         if(maxScore == 0)
             return false;
 
-        for(Holder<Enchantment> enchantment : tome.enchantments()){
+        for(Holder<Enchantment> enchantment : scroll.enchantments()){
             boolean enchantmentSupported = item.supportsEnchantment(enchantment);
             if(!enchantmentSupported)
                 continue;
 
-            if(item.getEnchantmentLevel(enchantment) >= tome.maxLevel())
+            if(item.getEnchantmentLevel(enchantment) >= scroll.maxLevel())
                 continue;
 
-            if(currentScore + tome.scorePerLevel() <= maxScore)
+            if(currentScore + scroll.scorePerLevel() <= maxScore)
                 return true;
 
         }

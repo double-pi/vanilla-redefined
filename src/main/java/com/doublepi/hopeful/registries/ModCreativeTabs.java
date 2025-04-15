@@ -1,8 +1,8 @@
 package com.doublepi.hopeful.registries;
 
 import com.doublepi.hopeful.HopefulMod;
-import com.doublepi.hopeful.tomes.Tome;
-import com.doublepi.hopeful.tomes.TomeItem;
+import com.doublepi.hopeful.scrolls.Scroll;
+import com.doublepi.hopeful.scrolls.ScrollItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.lang.ref.Reference;
 import java.util.function.Supplier;
 
 public class ModCreativeTabs {
@@ -20,14 +19,14 @@ public class ModCreativeTabs {
 
     public static final Supplier<CreativeModeTab> MOD_TAB =
             CREATIVE_MODE_TABS.register("hopeful_tab", () -> CreativeModeTab.builder()
-                    .title(Component.translatable("hopeful.tab"))
-                    .icon(() -> new ItemStack(ModItems.TOME.get()))
+                    .title(Component.translatable("tab.hopeful.scrolls"))
+                    .icon(() -> new ItemStack(ModItems.SCROLL.get()))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModBlocks.FORGE);
-                        pParameters.holders().lookup(ModTomes.TOME_REGISTRY_KEY).ifPresent(
-                                tomeRegistryLookup -> {
-                                    HopefulMod.LOGGER.error("registry lookup "+ tomeRegistryLookup.listElements().count());
-                                    generateTomes(pOutput,tomeRegistryLookup);
+                        pParameters.holders().lookup(ModResourceRegistries.SCROLL_REGISTRY_KEY).ifPresent(
+                                scrollRegistryLookup -> {
+                                    HopefulMod.LOGGER.error("registry lookup "+ scrollRegistryLookup.listElements().count());
+                                    generateScrolls(pOutput,scrollRegistryLookup);
                                 });
 
 
@@ -37,9 +36,9 @@ public class ModCreativeTabs {
         CREATIVE_MODE_TABS.register(eventBus);
     }
 
-    private static void generateTomes(CreativeModeTab.Output output, HolderLookup<Tome> tomes) {
-        tomes.listElements()
-                .map(tomeReference -> TomeItem.createForTome(tomeReference.value()))
+    private static void generateScrolls(CreativeModeTab.Output output, HolderLookup<Scroll> scrolls) {
+        scrolls.listElements()
+                .map(scrollRef -> ScrollItem.createForScroll(scrollRef.value()))
                         .forEach(itemStack -> output.accept(itemStack,
                         CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
     }

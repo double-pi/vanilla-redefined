@@ -1,20 +1,11 @@
 package com.doublepi.hopeful.forge;
 
-import com.doublepi.hopeful.HopefulMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ServerboundRenameItemPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.AnvilMenu;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -55,7 +46,7 @@ public class ForgeScreen extends ItemCombinerScreen<ForgeMenu> {
     protected void renderErrorIcon(GuiGraphics guiGraphics, int x, int y) {
         if(!this.menu.getSlot(ForgeMenu.INPUT_SLOT).hasItem())
             return;
-        if(!this.menu.getSlot(ForgeMenu.TOME_SLOT).hasItem())
+        if(!this.menu.getSlot(ForgeMenu.SCROLL_SLOT).hasItem())
             return;
         if(!this.menu.getSlot(ForgeMenu.RESULT_SLOT).hasItem())
             return;

@@ -1,15 +1,31 @@
 {
-  "tome.hopeful.luck": "Luck",
-  "tome.hopeful.unbreaking": "Unbreaking",
-  "tome.hopeful.punch": "Punch",
+  "tab.hopeful.scrolls": "Hopeful's Scrolls",
+  "container.hopeful.forge": "Forge",
+  "block.hopeful.forge": "Forge",
 
+  "scroll.hopeful.type.blessing": "Blessing",
+  "scroll.hopeful.type.curse": "Curse",
+  "scroll.hopeful.type.deal": "Deal",
 
-  "item.hopeful.tome": "Enchanted Tome",
-  "tome.hopeful.type.blessing": "Blessing",
-  "tome.hopeful.type.curse": "Curse",
-  "tome.hopeful.type.deal": "Deal",
+  "scroll.hopeful.luck": "Luck",
+  "scroll.hopeful.unbreaking": "Unbreaking",
+  "scroll.hopeful.punch": "Punch",
+  "scroll.hopeful.binding": "Binding",
+  "scroll.hopeful.echo": "The Echoed",
+  "scroll.hopeful.flame": "Flame",
+  "scroll.hopeful.fins": "Fins",
+  "scroll.hopeful.spiked": "The Spiked",
+  "scroll.hopeful.vanish": "Vanishing",
+
+  "enchantment.hopeful.fatigue": "Curse of Fatigue",
+  "enchantment.hopeful.fatigue.desc": "Decreases mining speed.",
+  "enchantment.hopeful.eternal": "Eternal",
+  "enchantment.hopeful.eternal.desc": "Stops the item from disappearing when it breaks.",
 
   "tooltip.hopeful.disabled_elytra_boosting": "Elytra Boosting is disabled.",
   "tooltip.hopeful.enchant_status": "Enchant Status",
-  "container.hopeful.forge": "Forge"
+  "tooltip.hopeful.max_level": "Max Level:",
+  "tooltip.hopeful.when_used_in_forge": "When Forged:",
+
+  "tag.item.hopeful.anvil_mends": "Anvil Mends"
 }

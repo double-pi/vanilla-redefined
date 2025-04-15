@@ -1,11 +1,11 @@
 {
   "title":{
-    "translate": "tome.hopeful.spiked"
+    "translate": "scroll.hopeful.punch"
   },
   "type": "blessing",
   "max_level": 3,
   "score_per_level": 1,
   "enchantments": [
-    "minecraft:thorns"
+    "minecraft:knockback","minecraft:punch"
   ]
 }
