@@ -25,10 +25,6 @@ public class UnknownScrollItem extends Item {
         if(level.isClientSide())
             return InteractionResultHolder.consume(itemStack);
         player.giveExperiencePoints(10);
-        if(level instanceof ServerLevel serverLevel) {
-            Scroll randomScroll = ScrollHelper.randomScroll(serverLevel);
-            player.addItem(ScrollItem.createForScroll(randomScroll));
-        }
         itemStack.consume(1,player);
         player.playSound(SoundEvents.BOOK_PAGE_TURN);
         player.awardStat(Stats.ITEM_USED.get(this));

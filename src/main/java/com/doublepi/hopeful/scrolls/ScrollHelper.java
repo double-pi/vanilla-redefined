@@ -5,12 +5,18 @@ import com.doublepi.hopeful.registries.ModDataComponentTypes;
 import com.doublepi.hopeful.registries.ModResourceRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.neoforged.neoforge.common.Tags;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class ScrollHelper {
 
@@ -18,7 +24,7 @@ public class ScrollHelper {
         for(Holder<Enchantment> enchantment : scroll.enchantments()){
             boolean itemSupportsEnchantment = item.supportsEnchantment(enchantment);
             boolean isNotMaxLevel = item.getEnchantmentLevel(enchantment)< scroll.maxLevel();
-            if(itemSupportsEnchantment && isNotMaxLevel && getScore(item) < enchantabilityToScore(item.getEnchantmentValue())){
+            if(itemSupportsEnchantment && isNotMaxLevel && getScore(item) < getMaxScore(item)){
                 int newLevel = item.getEnchantmentLevel(enchantment) + 1;
                 HopefulMod.LOGGER.error("Item enchanted to lvl "+ newLevel+ " score was changed from "+getScore(item)+
                         " to "+ (getScore(item) + scroll.scorePerLevel()));
@@ -58,6 +64,8 @@ public class ScrollHelper {
 
     public static int getMaxScore(ItemStack stack){
         int enchantability = stack.getEnchantmentValue();
+        if(!stack.is(ItemTags.DURABILITY_ENCHANTABLE))
+            return 0;
         return enchantabilityToScore(enchantability);
     }
     public static int getScore(ItemStack stack){
@@ -72,13 +80,4 @@ public class ScrollHelper {
     }
 
 
-    public static Scroll randomScroll(ServerLevel level){
-        if(!level.registryAccess().lookup(ModResourceRegistries.SCROLL_REGISTRY_KEY).isPresent())
-            HopefulMod.LOGGER.error("No registry??");
-        List<Holder.Reference<Scroll>> list =
-                level.registryAccess().lookup(ModResourceRegistries.SCROLL_REGISTRY_KEY).get().listElements().toList();
-        int len = list.size();
-        int randomIndex = (int)(Math.random() * len);
-        return list.get(randomIndex).value();
-    }
 }

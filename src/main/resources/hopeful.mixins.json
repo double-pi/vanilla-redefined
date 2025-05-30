@@ -4,10 +4,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FireworkItemMixin",
-    "ItemMixin",
     "LeavesBlockMixin",
     "PlayerMixin",
-    "ServerPlayerMixin"
+    "ServerPlayerMixin",
+    "EnchantingTableMixin"
   ],
   "client": [
   ],
