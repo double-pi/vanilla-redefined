@@ -1,6 +1,7 @@
 package com.doublepi.hopeful.registries;
 
 import com.doublepi.hopeful.HopefulMod;
+import com.doublepi.hopeful.chokeslate.ChokeslateBlock;
 import com.doublepi.hopeful.forge.ForgeBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -21,6 +22,9 @@ public class ModBlocks {
     public static final DeferredBlock<Block> FORGE = registerBlock("forge",
             ()-> new ForgeBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)
                     .sound(SoundType.AMETHYST)));
+
+    public static final DeferredBlock<Block> CHOKESLATE = registerBlock("chokeslate",
+            ()-> new ChokeslateBlock(BlockBehaviour.Properties.of().sound(SoundType.DEEPSLATE)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block){
         DeferredBlock<T> toReturn = BLOCKS.register(name,block);

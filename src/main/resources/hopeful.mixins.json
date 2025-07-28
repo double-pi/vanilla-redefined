@@ -7,7 +7,8 @@
     "LeavesBlockMixin",
     "PlayerMixin",
     "ServerPlayerMixin",
-    "EnchantingTableMixin"
+    "EnchantingTableMixin",
+    "AbstractHorseMixin"
   ],
   "client": [
   ],

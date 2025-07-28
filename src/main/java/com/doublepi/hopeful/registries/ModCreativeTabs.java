@@ -23,6 +23,7 @@ public class ModCreativeTabs {
                     .icon(() -> new ItemStack(ModItems.SCROLL.get()))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModBlocks.FORGE);
+                        pOutput.accept(ModBlocks.CHOKESLATE);
                         pOutput.accept(ModItems.UNKNOWN_SCROLL);
 
                         pParameters.holders().lookup(ModResourceRegistries.SCROLL_REGISTRY_KEY).ifPresent(
