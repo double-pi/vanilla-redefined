@@ -1,8 +1,8 @@
 {
   "tab.hopeful.scrolls": "Hopeful's Scrolls",
-  "container.hopeful.forge": "Enchant Using Scrolls",
-  "block.hopeful.forge": "Forge",
+  "container.hopeful.anvil": "Repair, Name, & Apply",
 
+  "block.hopeful.chokeslate": "Chokeslate",
   "item.hopeful.unknown_scroll": "Unknown Scroll",
 
   "scroll.hopeful.type.blessing": "Blessing",

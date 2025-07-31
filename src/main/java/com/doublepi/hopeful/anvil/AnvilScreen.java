@@ -1,4 +1,4 @@
-package com.doublepi.hopeful.forge;
+package com.doublepi.hopeful.anvil;
 
 import com.doublepi.hopeful.scrolls.ScrollHelper;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ForgeScreen extends ItemCombinerScreen<ForgeMenu> {
+public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
     private static final ResourceLocation TEXT_FIELD_SPRITE =
             ResourceLocation.withDefaultNamespace("container/anvil/text_field");
     private static final ResourceLocation TEXT_FIELD_DISABLED_SPRITE =
@@ -25,7 +25,7 @@ public class ForgeScreen extends ItemCombinerScreen<ForgeMenu> {
             ResourceLocation.withDefaultNamespace("textures/gui/container/anvil.png");
     private MultiLineTextWidget enchantStatus;
 
-    public ForgeScreen(ForgeMenu menu, Inventory playerInventory, Component title) {
+    public AnvilScreen(AnvilMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title, ANVIL_LOCATION);
         this.titleLabelX = 60;
     }
@@ -75,9 +75,9 @@ public class ForgeScreen extends ItemCombinerScreen<ForgeMenu> {
     }
 
     protected void renderErrorIcon(GuiGraphics guiGraphics, int x, int y) {
-        if(!this.menu.getSlot(ForgeMenu.INPUT_SLOT).hasItem())
+        if(!this.menu.getSlot(AnvilMenu.INPUT_SLOT).hasItem())
             return;
-        if(this.menu.getSlot(ForgeMenu.RESULT_SLOT).hasItem())
+        if(this.menu.getSlot(AnvilMenu.RESULT_SLOT).hasItem())
             return;
         guiGraphics.blitSprite(ERROR_SPRITE, x + 99, y + 45, 28, 21);
 

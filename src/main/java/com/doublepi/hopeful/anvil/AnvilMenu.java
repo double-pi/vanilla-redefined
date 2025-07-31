@@ -1,6 +1,5 @@
-package com.doublepi.hopeful.forge;
+package com.doublepi.hopeful.anvil;
 
-import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.registries.ModBlocks;
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
 import com.doublepi.hopeful.registries.ModItems;
@@ -9,7 +8,6 @@ import com.doublepi.hopeful.scrolls.Scroll;
 import com.doublepi.hopeful.scrolls.ScrollHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -19,18 +17,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ForgeMenu extends ItemCombinerMenu {
+public class AnvilMenu extends ItemCombinerMenu {
     public static final int INPUT_SLOT = 0;
     public static final int SCROLL_SLOT = 1;
     public static final int RESULT_SLOT = 2;
     public boolean used = false;
-    public ForgeMenu(int containerId, Inventory playerInventory,
+    public AnvilMenu(int containerId, Inventory playerInventory,
                      RegistryFriendlyByteBuf registryFriendlyByteBuf) {
         this(containerId, playerInventory, ContainerLevelAccess.NULL);
     }
 
-    public ForgeMenu(int containerId, Inventory playerInventory, ContainerLevelAccess access) {
-        super(ModMenus.FORGE_MENU.get(), containerId, playerInventory, access);
+    public AnvilMenu(int containerId, Inventory playerInventory, ContainerLevelAccess access) {
+        super(ModMenus.NEW_ANVIL_MENU.get(), containerId, playerInventory, access);
     }
 
     protected ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
@@ -43,7 +41,7 @@ public class ForgeMenu extends ItemCombinerMenu {
 
 
     protected boolean isValidBlock(BlockState state) {
-        return state.is(ModBlocks.FORGE) || state.is(Blocks.ENCHANTING_TABLE);
+        return state.is(Blocks.ANVIL);
     }
 
     @Override

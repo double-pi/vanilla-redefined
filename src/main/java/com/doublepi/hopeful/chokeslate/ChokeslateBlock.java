@@ -38,7 +38,6 @@ public class ChokeslateBlock extends Block {
         if(random.nextFloat()>0.8)
             level.playLocalSound(pos, SoundEvents.PACKED_MUD_PLACE, SoundSource.BLOCKS, 20, 1, false);
 
-
     }
 
     private boolean canSpreadUpwards(ServerLevel level, BlockPos pos){

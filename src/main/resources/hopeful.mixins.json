@@ -3,12 +3,12 @@
   "package": "com.doublepi.hopeful.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractHorseMixin",
+    "AnvilMixin",
     "FireworkItemMixin",
     "LeavesBlockMixin",
     "PlayerMixin",
-    "ServerPlayerMixin",
-    "EnchantingTableMixin",
-    "AbstractHorseMixin"
+    "ServerPlayerMixin"
   ],
   "client": [
   ],
