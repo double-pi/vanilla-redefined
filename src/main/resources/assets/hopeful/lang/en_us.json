@@ -29,6 +29,8 @@
   "tooltip.hopeful.max_level": "Max Level:",
   "tooltip.hopeful.when_used_in_forge": "When Forged:",
 
-  "tag.item.hopeful.anvil_mends": "Anvil Mends"
+  "tag.item.hopeful.anvil_mends": "Anvil Mends",
+
+  "entity.hopeful.mourner": "Mourner"
 
 }

@@ -1,9 +1,5 @@
-package com.doublepi.hopeful.scrolls;
+package com.doublepi.hopeful.content.scrolls;
 
-import com.doublepi.hopeful.registries.ModItems;
-import com.doublepi.hopeful.registries.ModResourceRegistries;
-import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;

@@ -1,6 +1,6 @@
 package com.doublepi.hopeful.registries;
 
-import com.doublepi.hopeful.anvil.AnvilScreen;
+import com.doublepi.hopeful.content.anvil.AnvilScreen;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 public class ModScreens {

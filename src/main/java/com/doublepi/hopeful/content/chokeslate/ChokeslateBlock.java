@@ -1,18 +1,23 @@
-package com.doublepi.hopeful.chokeslate;
+package com.doublepi.hopeful.content.chokeslate;
 
 import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class ChokeslateBlock extends Block {
     public ChokeslateBlock(Properties properties) {
@@ -22,9 +27,10 @@ public class ChokeslateBlock extends Block {
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
-        boolean s = anyPlayersLooking(level, pos);
-
-        HopefulMod.LOGGER.error("Is player looking? "+s);
+        List<ServerPlayer> nearbyPlayers = level.players().stream().filter(
+                (serverPlayer -> serverPlayer.position().distanceToSqr(pos.getCenter())<128)
+        ).toList();
+        boolean s = anyPlayersLooking(level, pos, nearbyPlayers);
         if(s)
             return;
         byte result = 0;
@@ -64,14 +70,13 @@ public class ChokeslateBlock extends Block {
         return (count>=3);
     }
 
-    public boolean anyPlayersLooking(ServerLevel level, BlockPos pos) {
+    public boolean anyPlayersLooking(ServerLevel level, BlockPos pos, List<ServerPlayer> players) {
 
-        for (Player player : level.players()){
+        for (Player player : players){
             Vec3 playerView = player.getViewVector(1).normalize();
             Vec3 delta = pos.getCenter().subtract(player.getPosition(1)).normalize();
 
             float angle =(float) Math.acos(delta.dot(playerView));
-            HopefulMod.LOGGER.error("angle: "+angle);
             if(angle < Math.PI/2)
                 return true;
         }

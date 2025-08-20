@@ -1,22 +1,11 @@
-package com.doublepi.hopeful.scrolls;
+package com.doublepi.hopeful.content.scrolls;
 
 import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
-import com.doublepi.hopeful.registries.ModResourceRegistries;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.neoforged.neoforge.common.Tags;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Optional;
 
 public class ScrollHelper {
 

@@ -1,6 +1,6 @@
-package com.doublepi.hopeful.anvil;
+package com.doublepi.hopeful.content.anvil;
 
-import com.doublepi.hopeful.scrolls.ScrollHelper;
+import com.doublepi.hopeful.content.scrolls.ScrollHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.MultiLineTextWidget;

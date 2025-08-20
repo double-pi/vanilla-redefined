@@ -1,6 +1,6 @@
 package com.doublepi.hopeful.mixins;
 
-import com.doublepi.hopeful.anvil.AnvilMenu;
+import com.doublepi.hopeful.content.anvil.AnvilMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;

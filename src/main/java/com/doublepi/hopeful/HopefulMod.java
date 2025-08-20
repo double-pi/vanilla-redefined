@@ -34,6 +34,7 @@ public class HopefulMod {
         ModMenus.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModGamerules.register();
+        ModEntities.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event){
@@ -53,9 +54,7 @@ public class HopefulMod {
     public static class ClientModEvents{
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event){
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            ModRenders.register(event);
         }
 
         @SubscribeEvent

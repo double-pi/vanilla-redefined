@@ -1,4 +1,4 @@
-package com.doublepi.hopeful.scrolls;
+package com.doublepi.hopeful.content.scrolls;
 
 import com.doublepi.hopeful.registries.ModResourceRegistries;
 import com.mojang.serialization.Codec;
@@ -17,7 +17,6 @@ import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 public record Scroll(Component title, ScrollType scrollType, int maxLevel, int scorePerLevel, HolderSet<Enchantment> enchantments) {
     public static final Codec<Scroll> CODEC =

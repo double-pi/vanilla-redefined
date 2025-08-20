@@ -1,11 +1,10 @@
-package com.doublepi.hopeful.anvil;
+package com.doublepi.hopeful.content.anvil;
 
-import com.doublepi.hopeful.registries.ModBlocks;
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
 import com.doublepi.hopeful.registries.ModItems;
 import com.doublepi.hopeful.registries.ModMenus;
-import com.doublepi.hopeful.scrolls.Scroll;
-import com.doublepi.hopeful.scrolls.ScrollHelper;
+import com.doublepi.hopeful.content.scrolls.Scroll;
+import com.doublepi.hopeful.content.scrolls.ScrollHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;

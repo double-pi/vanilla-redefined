@@ -1,4 +1,4 @@
-package com.doublepi.hopeful.scrolls;
+package com.doublepi.hopeful.content.scrolls;
 
 import com.doublepi.hopeful.registries.ModDataComponentTypes;
 import com.doublepi.hopeful.registries.ModItems;
