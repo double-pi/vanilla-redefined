@@ -7,6 +7,7 @@ import com.doublepi.hopeful.content.scrolls.Scroll;
 import com.doublepi.hopeful.content.scrolls.ScrollHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -40,7 +41,7 @@ public class AnvilMenu extends ItemCombinerMenu {
 
 
     protected boolean isValidBlock(BlockState state) {
-        return state.is(Blocks.ANVIL);
+        return state.is(BlockTags.ANVIL);
     }
 
     @Override

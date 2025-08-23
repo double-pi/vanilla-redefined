@@ -18,9 +18,15 @@
   "scroll.hopeful.fins": "Fins",
   "scroll.hopeful.spiked": "The Spiked",
   "scroll.hopeful.vanish": "Vanishing",
+  "scroll.hopeful.endless": "Endless",
+  "scroll.hopeful.eternal": "Eternal",
+  "scroll.hopeful.precision": "Precision",
+  "scroll.hopeful.impact": "Impact",
 
-  "enchantment.hopeful.fatigue": "Curse of Fatigue",
-  "enchantment.hopeful.fatigue.desc": "Decreases mining speed.",
+  "enchantment.hopeful.fatigue_curse": "Curse of Fatigue",
+  "enchantment.hopeful.fatigue_curse.desc": "Decreases mining speed.",
+  "enchantment.hopeful.fragile_curse": "Curse of Fragility",
+  "enchantment.hopeful.fragile_curse.desc": "Causes items to lose durability faster.",
   "enchantment.hopeful.eternal": "Eternal",
   "enchantment.hopeful.eternal.desc": "Stops the item from disappearing when it breaks.",
 
@@ -31,6 +37,7 @@
 
   "tag.item.hopeful.anvil_mends": "Anvil Mends",
 
-  "entity.hopeful.mourner": "Mourner"
+  "entity.hopeful.mourner": "Mourner",
+  "item.hopeful.mourner_spawn_egg": "Mourner Spawn Egg"
 
 }

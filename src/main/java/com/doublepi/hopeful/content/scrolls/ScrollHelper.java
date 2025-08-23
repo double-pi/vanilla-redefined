@@ -31,17 +31,16 @@ public class ScrollHelper {
             return false;
 
         for(Holder<Enchantment> enchantment : scroll.enchantments()){
-            boolean enchantmentSupported = item.supportsEnchantment(enchantment);
-            if(!enchantmentSupported)
+            if(!item.supportsEnchantment(enchantment))
                 continue;
 
             if(item.getEnchantmentLevel(enchantment) >= scroll.maxLevel())
                 continue;
 
-            if(currentScore + scroll.scorePerLevel() <= maxScore)
+            if(currentScore + scroll.scorePerLevel() <= maxScore && currentScore + scroll.scorePerLevel() >=0)
                 return true;
-
         }
+
         return false;
     }
 

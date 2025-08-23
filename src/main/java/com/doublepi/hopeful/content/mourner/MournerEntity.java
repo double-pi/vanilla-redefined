@@ -45,6 +45,10 @@ public class MournerEntity extends TamableAnimal {
             setOwnerUUID(player.getUUID());
             return InteractionResult.CONSUME;
         }
+        if(getOwnerUUID() == player.getUUID()){
+            this.setOrderedToSit(true);
+            return InteractionResult.SUCCESS;
+        }
         return InteractionResult.FAIL;
     }
 

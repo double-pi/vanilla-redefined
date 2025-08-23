@@ -1,6 +1,8 @@
 package com.doublepi.hopeful.content.anvil;
 
+import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.content.scrolls.ScrollHelper;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.MultiLineTextWidget;
@@ -23,11 +25,19 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
             ResourceLocation.withDefaultNamespace("container/anvil/error");
     private static final ResourceLocation ANVIL_LOCATION =
             ResourceLocation.withDefaultNamespace("textures/gui/container/anvil.png");
+
+    private static final ResourceLocation EMPTY_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "empty_bar");
+    private static final ResourceLocation PREVIEW_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "preview_bar");
+    private static final ResourceLocation FULL_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "full_bar");
+
+
+
     private MultiLineTextWidget enchantStatus;
 
     public AnvilScreen(AnvilMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title, ANVIL_LOCATION);
         this.titleLabelX = 60;
+
     }
 
     @Override
@@ -55,11 +65,13 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
 
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(guiGraphics, partialTick, mouseX, mouseY);
-        guiGraphics.blitSprite(this.menu.getSlot(0).hasItem() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 59, this.topPos + 20, 110, 16);
+        guiGraphics.blitSprite(this.menu.getSlot(0).hasItem() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE,
+                this.leftPos + 59, this.topPos + 20, 110, 16);
     }
 
     public void renderFg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         this.enchantStatus.render(guiGraphics, mouseX, mouseY, partialTick);
+        renderToolExperience(guiGraphics);
     }
 
     public void slotChanged(AbstractContainerMenu containerToSend, int slotInd, ItemStack stack) {
@@ -80,7 +92,36 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
         if(this.menu.getSlot(AnvilMenu.RESULT_SLOT).hasItem())
             return;
         guiGraphics.blitSprite(ERROR_SPRITE, x + 99, y + 45, 28, 21);
+    }
 
+    public void renderToolExperience(GuiGraphics guiGraphics){
+
+        if(!menu.getSlot(0).hasItem())
+            return;
+        int prevStatus = ScrollHelper.getScore(this.menu.getSlot(0).getItem());
+        int maxStatus = ScrollHelper.getMaxScore(this.menu.getSlot(0).getItem());
+
+        int addedToStatus = 0;
+        if(menu.getSlot(2).hasItem()){
+            addedToStatus = ScrollHelper.getScore(this.menu.getSlot(2).getItem()) - prevStatus;
+        }
+
+        int nextStatus = addedToStatus + prevStatus;
+
+        int size = 110;
+        int increment = size/maxStatus;
+
+        int xPos = this.leftPos + 59 + (size-increment*maxStatus)/2;
+        int yPos = this.topPos + 38;
+        for (int i = 0; i < prevStatus; i++) {
+            guiGraphics.blitSprite(FULL_BAR_SPRITE, xPos+i*increment,yPos, increment,4);
+        }
+        for (int i = Math.min(prevStatus, nextStatus); i < Math.max(prevStatus, nextStatus); i++) {
+            guiGraphics.blitSprite(PREVIEW_BAR_SPRITE, xPos+i*increment,yPos, increment,4);
+        }
+        for (int i = Math.max(prevStatus, nextStatus); i < maxStatus; i++) {
+            guiGraphics.blitSprite(EMPTY_BAR_SPRITE, xPos+i*increment,yPos, increment,4);
+        }
     }
 
 }

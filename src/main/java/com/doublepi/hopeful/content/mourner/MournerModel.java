@@ -3,6 +3,7 @@ package com.doublepi.hopeful.content.mourner;// Made with Blockbench 4.12.5
 // Paste this class into your mod and generate all required imports
 
 
+import com.doublepi.hopeful.HopefulMod;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -46,7 +47,7 @@ public class MournerModel extends EntityModel<MournerEntity> {
     @Override
     public void setupAnim(MournerEntity mournerEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         vails.resetPose();
-        float yOffset = 0.1f+(float) Math.sin(ageInTicks*0.02f);
+        float yOffset = 0.4f*(float) Math.sin(ageInTicks*0.02f);
         vails.offsetPos(new Vector3f(0, yOffset, 0));
     }
 }
