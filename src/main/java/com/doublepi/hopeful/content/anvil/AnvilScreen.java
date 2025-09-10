@@ -2,15 +2,17 @@ package com.doublepi.hopeful.content.anvil;
 
 import com.doublepi.hopeful.HopefulMod;
 import com.doublepi.hopeful.content.scrolls.ScrollHelper;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.MultiLineTextWidget;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ServerboundRenameItemPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -27,12 +29,13 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
             ResourceLocation.withDefaultNamespace("textures/gui/container/anvil.png");
 
     private static final ResourceLocation EMPTY_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "empty_bar");
-    private static final ResourceLocation PREVIEW_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "preview_bar");
+    private static final ResourceLocation TO_ADD_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "to_add_bar");
+    private static final ResourceLocation TO_REMOVE_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "to_remove_bar");
     private static final ResourceLocation FULL_BAR_SPRITE = ResourceLocation.fromNamespaceAndPath(HopefulMod.MODID, "full_bar");
 
 
 
-    private MultiLineTextWidget enchantStatus;
+    private EditBox name;
 
     public AnvilScreen(AnvilMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title, ANVIL_LOCATION);
@@ -44,15 +47,43 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
     protected void subInit() {
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        this.enchantStatus = new MultiLineTextWidget(i + 62, j + 24, Component.empty(), this.font);
-        this.enchantStatus.setMessage(Component.literal("amongus"));
-        this.addWidget(this.enchantStatus);
+        this.name = new EditBox(this.font, i + 62, j + 24, 103, 12, Component.translatable("container.repair"));
+
+        this.name.setCanLoseFocus(false);
+        this.name.setTextColor(-1);
+        this.name.setTextColorUneditable(-1);
+        this.name.setBordered(false);
+        this.name.setMaxLength(50);
+        this.name.setResponder(this::onNameChanged);
+        this.name.setValue("");
+        this.addWidget(this.name);
+        this.name.setEditable(this.menu.getSlot(0).hasItem());
     }
 
+    @Override
+    protected void setInitialFocus() {
+        this.setInitialFocus(this.name);
+    }
 
+    private void onNameChanged(String name) {
+        HopefulMod.LOGGER.error("name changed");
+        Slot slot = this.menu.getSlot(0);
+        if (slot.hasItem()) {
+            String s = name;
+//            if (!slot.getItem().has(DataComponents.CUSTOM_NAME) && name.equals(slot.getItem().getHoverName().getString())) {
+//                s = "";
+//            }
 
+            if (this.menu.setItemName(s)) {
+                HopefulMod.LOGGER.error("wroking?");
+                this.minecraft.player.connection.send(new ServerboundRenameItemPacket(s));
+            }
+        }
+    }
     public void resize(Minecraft minecraft, int width, int height) {
+        String s = this.name.getValue();
         this.init(minecraft, width, height);
+        this.name.setValue(s);
     }
 
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
@@ -60,7 +91,7 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
             this.minecraft.player.closeContainer();
         }
 
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return !this.name.keyPressed(keyCode, scanCode, modifiers) && !this.name.canConsumeInput() ? super.keyPressed(keyCode, scanCode, modifiers) : true;
     }
 
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
@@ -70,20 +101,20 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
     }
 
     public void renderFg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.enchantStatus.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.name.render(guiGraphics, mouseX, mouseY, partialTick);
         renderToolExperience(guiGraphics);
     }
 
     public void slotChanged(AbstractContainerMenu containerToSend, int slotInd, ItemStack stack) {
-        if (!this.menu.getSlot(2).hasItem() || !this.menu.getSlot(0).hasItem()){
-            this.enchantStatus.setMessage(Component.empty());
+        if (!this.menu.getSlot(0).hasItem()){
+            this.name.setValue("");
+            HopefulMod.LOGGER.error("clear");
             return;
         }
-        int prevStatus = ScrollHelper.getScore(this.menu.getSlot(0).getItem());
-        int nextStatus = ScrollHelper.getScore(this.menu.getSlot(2).getItem());
-        int maxStatus = ScrollHelper.getMaxScore(this.menu.getSlot(0).getItem());
-        this.enchantStatus.setMessage(Component.literal(prevStatus+" -> "+nextStatus+" out of "+maxStatus));
 
+        this.name.setValue(stack.isEmpty() ? "" : stack.getHoverName().getString());
+        this.name.setEditable(true);
+        this.setFocused(this.name);
     }
 
     protected void renderErrorIcon(GuiGraphics guiGraphics, int x, int y) {
@@ -96,7 +127,7 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
 
     public void renderToolExperience(GuiGraphics guiGraphics){
 
-        if(!menu.getSlot(0).hasItem())
+        if(menu.getSlot(0).getItem().getEnchantmentValue() == 0)
             return;
         int prevStatus = ScrollHelper.getScore(this.menu.getSlot(0).getItem());
         int maxStatus = ScrollHelper.getMaxScore(this.menu.getSlot(0).getItem());
@@ -113,11 +144,17 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
 
         int xPos = this.leftPos + 59 + (size-increment*maxStatus)/2;
         int yPos = this.topPos + 38;
-        for (int i = 0; i < prevStatus; i++) {
+        for (int i = 0; i < Math.min(prevStatus, nextStatus); i++) {
             guiGraphics.blitSprite(FULL_BAR_SPRITE, xPos+i*increment,yPos, increment,4);
         }
-        for (int i = Math.min(prevStatus, nextStatus); i < Math.max(prevStatus, nextStatus); i++) {
-            guiGraphics.blitSprite(PREVIEW_BAR_SPRITE, xPos+i*increment,yPos, increment,4);
+        if(addedToStatus >= 0) {
+            for (int i = prevStatus; i < nextStatus; i++) {
+                guiGraphics.blitSprite(TO_ADD_BAR_SPRITE, xPos + i * increment, yPos, increment, 4);
+            }
+        }else{
+            for (int i = nextStatus; i < prevStatus; i++) {
+                guiGraphics.blitSprite(TO_REMOVE_BAR_SPRITE, xPos + i * increment, yPos, increment, 4);
+            }
         }
         for (int i = Math.max(prevStatus, nextStatus); i < maxStatus; i++) {
             guiGraphics.blitSprite(EMPTY_BAR_SPRITE, xPos+i*increment,yPos, increment,4);
